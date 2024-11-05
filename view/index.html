@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worklog Management System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script src="../assets/main.js" defer></script>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Worklog Management System</h1>
+      </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Create a Worklog</h1>
+            <form action="create.php" method="post">
+                <div class="field">
+                    <label class="label">Task Number</label>
+                    <div class="control">
+                        <input class="input" type="text" name="task_number" placeholder="Task Number" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                        <input class="input" type="text" name="title" placeholder="Title" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Link to Task Description</label>
+                    <div class="control">
+                        <input class="input" type="url" name="description_link" placeholder="Link to Task Description" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Description</label>
+                    <div class="control">
+                        <textarea class="textarea" name="description" placeholder="Task Description"></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Analysis</label>
+                    <div class="control">
+                        <textarea class="textarea" name="analysis" placeholder="Analysis"></textarea>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Create Worklog</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-light" type="reset">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <div class="container">
+        <section>
+            <div id="worklog-list"></div>
+        </section>
+    </div>
+  </body>
+  <div class="modal" id="editModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit Worklog</p>
+        <button
+          class="delete"
+          aria-label="close"
+          onclick="document.getElementById('editModal').classList.remove('is-active')"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <form id="editForm">
+          <input type="hidden" id="editWorklogId" />
+          <div class="field">
+            <label class="label">Task Number</label>
+            <div class="control">
+              <input class="input" type="text" id="editTaskNumber" required />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+              <input class="input" type="text" id="editTitle" required />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Link to Task Description</label>
+            <div class="control">
+              <input
+                class="input"
+                type="url"
+                id="editDescriptionLink"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+              <textarea class="textarea" id="editDescription"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Analysis</label>
+            <div class="control">
+              <textarea class="textarea" id="editAnalysis"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" id="editIsFinished" />
+              Mark as finished
+            </label>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button
+                type="button"
+                class="button is-success"
+                onclick="submitEditForm()"
+              >
+                Save Changes
+              </button>
+            </div>
+            <div class="control">
+              <button
+                type="button"
+                class="button is-light"
+                onclick="document.getElementById('editModal').classList.remove('is-active')"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</html>
