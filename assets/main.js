@@ -45,11 +45,11 @@ async function deleteWorklog(id) {
 // Function to show the edit modal with worklog data
 async function showEditModal(id) {
     console.log('into showEditModal method')
-    console.log(id)
     // Fetch existing worklog data
     const worklog = await this.fetchWorklogById(id);
 
     if (worklog) {
+        document.getElementById('editWorklogId').value = worklog.id;
         document.getElementById('editTaskNumber').value = worklog.task_number;
         document.getElementById('editTitle').value = worklog.title;
         document.getElementById('editDescriptionLink').value = worklog.description_link;
@@ -87,7 +87,7 @@ async function submitEditForm() {
     const analysis = document.getElementById('editAnalysis').value;
     const isFinished = document.getElementById('editIsFinished').checked ? 1 : 0;
 
-    const response = await fetch('../controller/updateWorklog.php', {
+    const response = await fetch(`../controller/updateWorklog.php?id=${id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, task_number: taskNumber, title, description_link: descriptionLink, description, analysis, is_finished: isFinished }),
