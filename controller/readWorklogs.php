@@ -6,6 +6,9 @@ header('Content-Type: application/json');
 
 // Get the HTTP method
 $method = $_SERVER['REQUEST_METHOD'];
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
 switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
@@ -13,7 +16,7 @@ switch ($method) {
             $worklog = $model->getWorklogsById($id);
             echo json_encode($worklog);
         } else {
-            $worklogs = $model->getWorklogs();
+            $worklogs = $model->getWorklogs($offset);
             echo json_encode($worklogs);
         }
         break;

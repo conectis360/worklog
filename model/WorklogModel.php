@@ -18,8 +18,11 @@ class WorklogModel {
         return $stmt->execute();
     }
 
-    public function getWorklogs() {
-        $result = $this->db->query('SELECT * FROM worklogs ORDER BY date_created DESC');
+    public function getWorklogs($offset) {
+        $stmt = $this->db->prepare('SELECT * FROM worklogs ORDER BY date_created DESC LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':offset', $offset, SQLITE3_INTEGER);
+        $result = $stmt->execute();
+        
         $worklogs = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $worklogs[] = $row;
