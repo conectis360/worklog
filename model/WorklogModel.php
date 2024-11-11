@@ -18,16 +18,26 @@ class WorklogModel {
         return $stmt->execute();
     }
 
-    public function getWorklogs($offset) {
+    public function getWorklogs($offset, $page, $limit) {
         $stmt = $this->db->prepare('SELECT * FROM worklogs ORDER BY date_created DESC LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':limit', $limit, SQLITE3_INTEGER);
         $stmt->bindValue(':offset', $offset, SQLITE3_INTEGER);
         $result = $stmt->execute();
-        
+
         $worklogs = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $worklogs[] = $row;
         }
-        return $worklogs;
+
+        // Count the total number of worklogs to calculate the number of pages
+        $totalQuery = $this->db->querySingle("SELECT COUNT(*) as count FROM worklogs");
+        $totalItems = (int)$totalQuery;
+        $totalPages = ceil($totalItems / $limit);
+        return json_encode([
+            'worklogs' => $worklogs,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ]);
     }
 
     public function getWorklogsById($id) {
