@@ -55,7 +55,7 @@
             <main class="column content-area">
                 <!-- Dynamic content will be loaded here -->
                 <div id="">
-                    <?php include 'index.html' ?>
+                    <?php include 'pagination.html' ?>
                 </div>
                 <div id="pagination-controls" class="buttons"></div>
             </main>
@@ -67,6 +67,6 @@
         <p>Worklog Management System &copy; 2023. All rights reserved.</p>
     </footer>
 
-    <script src="../assets/main.js" defer></script>
+    <script src="../assets/pagination.js" defer></script>
 </body>
 </html>
