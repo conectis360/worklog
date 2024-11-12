@@ -33,11 +33,12 @@ class WorklogModel {
         $totalQuery = $this->db->querySingle("SELECT COUNT(*) as count FROM worklogs");
         $totalItems = (int)$totalQuery;
         $totalPages = ceil($totalItems / $limit);
-        return json_encode([
+        $array = array(
             'worklogs' => $worklogs,
             'totalPages' => $totalPages,
             'currentPage' => $page
-        ]);
+        );
+        return json_encode($array);
     }
 
     public function getWorklogsById($id) {

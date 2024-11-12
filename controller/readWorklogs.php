@@ -15,10 +15,10 @@ switch ($method) {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $worklog = $model->getWorklogsById($id);
-            echo json_encode($worklog);
+            echo $worklog;
         } else {
             $worklogs = $model->getWorklogs($offset, $page, $limit);
-            echo json_encode($worklogs);
+            echo $worklogs;
         }
         break;
 }
