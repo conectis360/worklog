@@ -22,7 +22,7 @@ function renderWorklogs(worklogs) {
 
         const worklogItem = `
             <tr>
-                    <td></td>
+                    <td>worklog-${worklog.id}</td>
                     <td style="${titleStyle}">${worklog.title}${isFinished} (Task #${worklog.task_number})</td>
                     <td><a href="${worklog.description_link}" target="_blank" class="is-link">View Task Description</a></td>
                     <td>${worklog.description}</td>
