@@ -40,8 +40,8 @@
     <header class="top-bar">
         <p>Worklog Management System</p>
     </header>
-<!-- Toggle Button -->
-<button class="toggle-button" id="toggleButton">☰ Menu</button>
+    <!-- Toggle Button -->
+    <button class="toggle-button" id="toggleButton">☰ Menu</button>
     <!-- Layout Container -->
     <div class="container is-fluid">
         <div class="columns">
@@ -64,7 +64,20 @@
             <main class="column content-area">
                 <!-- Dynamic content will be loaded here -->
                 <div id="">
-                    <?php include 'pagination.html' ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><abbr title="Worklog ID">ID</abbr></th>
+                                <th><abbr title="Title">Titulo</abbr></th>
+                                <th><abbr title="Description">Descrição</abbr></th>
+                                <th><abbr title="Analysis">Analise</abbr></th>
+                                <th><abbr title="Created">Criado Em</abbr></th>
+                                <th><abbr title="Editar">Editar</abbr></th>
+                                <th><abbr title="Deletar">Deletar</abbr></th>
+                            </tr>
+                        </thead>
+                        <?php include 'pagination.html' ?>
+                    </table>
                 </div>
                 <div id="pagination-controls" class="buttons"></div>
             </main>
