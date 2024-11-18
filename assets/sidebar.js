@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('entrou')
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
     const toggleButton = document.getElementById('toggleButton');

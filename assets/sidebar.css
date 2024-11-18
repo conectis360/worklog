@@ -20,13 +20,13 @@
   margin-top: 1rem;
 }
 
-.content {
+.content-area {
   margin-left: 0;
   padding: 1rem;
   transition: margin-left 0.3s ease;
 }
 
-.content.shifted {
+.content-area.shifted {
   margin-left: 250px;
 }
 
@@ -47,4 +47,37 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom styles to make the layout responsive */
+.top-bar {
+    padding: 1rem;
+    background-color: #3273dc;
+    color: white;
+    text-align: center;
+}
+
+.menu-bar {
+    height: 100vh;
+    background-color: #f5f5f5;
+    padding-top: 1rem;
+}
+
+.content-area {
+    padding: 2rem;
+}
+
+.bottom-bar {
+    padding: 1rem;
+    background-color: #3273dc;
+    color: white;
+    text-align: center;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
