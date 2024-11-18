@@ -53,10 +53,8 @@
                 <aside class="menu">
                     <p class="menu-label">Navigation</p>
                     <ul class="menu-list">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Add Worklog</a></li>
-                        <li><a href="#">View Worklogs</a></li>
-                        <li><a href="#">Completed Tasks</a></li>
+                        <li><a href="#">WORKLOG</a></li>
+                        <li><a href="#">FINANCES</a></li>
                     </ul>
                 </aside>
             </aside>
@@ -69,6 +67,7 @@
                             <tr>
                                 <th><abbr title="Worklog ID">ID</abbr></th>
                                 <th><abbr title="Title">Titulo</abbr></th>
+                                <th><abbr title="Description Link">Chamado</abbr></th>
                                 <th><abbr title="Description">Descrição</abbr></th>
                                 <th><abbr title="Analysis">Analise</abbr></th>
                                 <th><abbr title="Created">Criado Em</abbr></th>
