@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../assets/budget.js" defer></script>
+</head>
+<body>
+    <!-- Top Bar -->
+    <header class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <h1 class="title has-text-white">Budget Management</h1>
+            </a>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <!-- Summary Section -->
+            <div class="columns is-multiline">
+                <div class="column is-one-quarter">
+                    <div class="box has-background-success-light">
+                        <p class="title is-4">Income</p>
+                        <p class="subtitle is-5" id="income-total">$0</p>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="box has-background-danger-light">
+                        <p class="title is-4">Expenses</p>
+                        <p class="subtitle is-5" id="expenses-total">$0</p>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="box has-background-info-light">
+                        <p class="title is-4">Savings</p>
+                        <p class="subtitle is-5" id="savings-total">$0</p>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="box has-background-warning-light">
+                        <p class="title is-4">Debts</p>
+                        <p class="subtitle is-5" id="debts-total">$0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="box">
+                <h2 class="title is-5">Expense Breakdown</h2>
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
