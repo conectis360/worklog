@@ -1,4 +1,5 @@
 <?php
+/*
 require_once '../model/BudgetModel.php';
 $model = new BudgetModel();
 
@@ -7,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $model->addIncome($data['user_id'], $data['amount'], $data['source'], $data['date'], $data['notes']);
     echo json_encode(['success' => $result]);
 }
+    */
 ?>
 
 <?php

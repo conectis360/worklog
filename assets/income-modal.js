@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Send data to the backend
         try {
-            const response = await fetch('../controller/addIncome.php', {
+            const response = await fetch('../controller/createIncome.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(incomeData),
