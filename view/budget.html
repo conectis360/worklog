@@ -124,6 +124,78 @@
     
         <button class="button is-primary" id="openModal">Add Income</button>
     
+        
+        <!-- Add Expense Modal -->
+    <div class="modal" id="expenseModal" aria-hidden="true" role="dialog" aria-labelledby="expenseModalTitle">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="expenseModalTitle">Add Expense</p>
+                <button class="delete" aria-label="close" id="closeExpenseModal"></button>
+            </header>
+            <section class="modal-card-body">
+                <form id="expenseForm">
+                    <!-- Expense Source -->
+                    <div class="field">
+                        <label class="label" for="expenseSource">Expense Source</label>
+                        <div class="control">
+                            <input class="input" type="text" id="expenseSource" placeholder="e.g., Rent, Groceries" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Amount -->
+                    <div class="field">
+                        <label class="label" for="expenseAmount">Amount</label>
+                        <div class="control">
+                            <input class="input" type="number" id="expenseAmount" placeholder="Enter amount" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Category -->
+                    <div class="field">
+                        <label class="label" for="expenseCategory">Category</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="expenseCategory" required>
+                                    <option value="" disabled selected>Select a category</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Groceries">Groceries</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date -->
+                    <div class="field">
+                        <label class="label" for="expenseDate">Date</label>
+                        <div class="control">
+                            <input class="input" type="date" id="expenseDate" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="field">
+                        <label class="label" for="expenseNotes">Notes</label>
+                        <div class="control">
+                            <textarea class="textarea" id="expenseNotes" placeholder="Additional comments"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="saveExpense">Save</button>
+                <button class="button" id="cancelExpenseModal">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <button class="button is-danger" id="openExpenseModal">Add Expense</button>
+
+        <script src="../assets/expense-modal.js" defer></script>
         <script src="../assets/income-modal.js" defer></script>
+        
 </body>
 </html>
