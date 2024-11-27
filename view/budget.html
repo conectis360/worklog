@@ -55,5 +55,75 @@
             </div>
         </div>
     </section>
+
+        <!-- Add Income Modal -->
+        <div class="modal" id="incomeModal" aria-hidden="true" role="dialog" aria-labelledby="incomeModalTitle">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title" id="incomeModalTitle">Add Income</p>
+                    <button class="delete" aria-label="close" id="closeModal"></button>
+                </header>
+                <section class="modal-card-body">
+                    <form id="incomeForm">
+                        <!-- Income Source -->
+                        <div class="field">
+                            <label class="label" for="incomeSource">Income Source</label>
+                            <div class="control">
+                                <input class="input" type="text" id="incomeSource" placeholder="e.g., Salary, Freelance Work" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Amount -->
+                        <div class="field">
+                            <label class="label" for="incomeAmount">Amount</label>
+                            <div class="control">
+                                <input class="input" type="number" id="incomeAmount" placeholder="Enter amount" step="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Category -->
+                        <div class="field">
+                            <label class="label" for="incomeCategory">Category</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select id="incomeCategory" required>
+                                        <option value="" disabled selected>Select a category</option>
+                                        <option value="Salary">Salary</option>
+                                        <option value="Bonus">Bonus</option>
+                                        <option value="Investment">Investment</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Date -->
+                        <div class="field">
+                            <label class="label" for="incomeDate">Date</label>
+                            <div class="control">
+                                <input class="input" type="date" id="incomeDate" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="field">
+                            <label class="label" for="incomeNotes">Notes</label>
+                            <div class="control">
+                                <textarea class="textarea" id="incomeNotes" placeholder="Additional comments"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success" id="saveIncome">Save</button>
+                    <button class="button" id="cancelModal">Cancel</button>
+                </footer>
+            </div>
+        </div>
+    
+        <button class="button is-primary" id="openModal">Add Income</button>
+    
+        <script src="income-modal.js" defer></script>
 </body>
 </html>
