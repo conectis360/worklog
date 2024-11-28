@@ -1,167 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Management</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="../assets/budget.js" defer></script>
-</head>
-<body>
+    <link rel="stylesheet" href="../assets/investment-modal.css">
+    <link rel="stylesheet" href="../assets/income-modal.css">
+    <link rel="stylesheet" href="../assets/expense-modal.css">
+  </head>
+  <body>
     <!-- Top Bar -->
     <header class="navbar is-primary">
-        <div class="navbar-brand">
-            <a class="navbar-item">
-                <h1 class="title has-text-white">Budget Management</h1>
-            </a>
-        </div>
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <h1 class="title has-text-white">Budget Management</h1>
+        </a>
+      </div>
     </header>
 
     <section class="section">
-        <div class="container">
-            <!-- Summary Section -->
-            <div class="columns is-multiline">
-                <div class="column is-one-quarter">
-                    <div class="box has-background-success-light">
-                        <p class="title is-4">Income</p>
-                        <p class="subtitle is-5" id="income-total">$0</p>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="box has-background-danger-light">
-                        <p class="title is-4">Expenses</p>
-                        <p class="subtitle is-5" id="expenses-total">$0</p>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="box has-background-info-light">
-                        <p class="title is-4">Savings</p>
-                        <p class="subtitle is-5" id="savings-total">$0</p>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="box has-background-warning-light">
-                        <p class="title is-4">Debts</p>
-                        <p class="subtitle is-5" id="debts-total">$0</p>
-                    </div>
-                </div>
+      <div class="container">
+        <!-- Summary Section -->
+        <div class="columns is-multiline">
+          <div class="column is-one-quarter">
+            <div class="box has-background-success-light">
+              <p class="title is-4">Income</p>
+              <p class="subtitle is-5" id="income-total">$0</p>
             </div>
-
-            <!-- Charts Section -->
-            <div class="box">
-                <h2 class="title is-5">Expense Breakdown</h2>
-                <canvas id="expenseChart"></canvas>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box has-background-danger-light">
+              <p class="title is-4">Expenses</p>
+              <p class="subtitle is-5" id="expenses-total">$0</p>
             </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box has-background-info-light">
+              <p class="title is-4">Savings</p>
+              <p class="subtitle is-5" id="savings-total">$0</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box has-background-warning-light">
+              <p class="title is-4">Debts</p>
+              <p class="subtitle is-5" id="debts-total">$0</p>
+            </div>
+          </div>
         </div>
+
+        <!-- Charts Section -->
+        <div class="box">
+          <h2 class="title is-5">Expense Breakdown</h2>
+          <canvas id="expenseChart"></canvas>
+        </div>
+        <div id="modals">
+            <button class="button is-primary" id="openModal">Add Income</button>
+            <button class="button is-danger" id="openExpenseModal">Add Expense</button>
+            <button class="button is-link" id="openInvestmentModal">Add Investment</button>
+        </div>
+      </div>
     </section>
 
-        <!-- Add Income Modal -->
-        <div class="modal" id="incomeModal" aria-hidden="true" role="dialog" aria-labelledby="incomeModalTitle">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title" id="incomeModalTitle">Add Income</p>
-                    <button class="delete" aria-label="close" id="closeModal"></button>
-                </header>
-                <section class="modal-card-body">
-                    <form id="incomeForm">
-                        <!-- Income Source -->
-                        <div class="field">
-                            <label class="label" for="incomeSource">Income Source</label>
-                            <div class="control">
-                                <input class="input" type="text" id="incomeSource" placeholder="e.g., Salary, Freelance Work" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Amount -->
-                        <div class="field">
-                            <label class="label" for="incomeAmount">Amount</label>
-                            <div class="control">
-                                <input class="input" type="number" id="incomeAmount" placeholder="Enter amount" step="0.01" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Category -->
-                        <div class="field">
-                            <label class="label" for="incomeCategory">Category</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select id="incomeCategory" required>
-                                        <option value="" disabled selected>Select a category</option>
-                                        <option value="Salary">Salary</option>
-                                        <option value="Bonus">Bonus</option>
-                                        <option value="Investment">Investment</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Date -->
-                        <div class="field">
-                            <label class="label" for="incomeDate">Date</label>
-                            <div class="control">
-                                <input class="input" type="date" id="incomeDate" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Notes -->
-                        <div class="field">
-                            <label class="label" for="incomeNotes">Notes</label>
-                            <div class="control">
-                                <textarea class="textarea" id="incomeNotes" placeholder="Additional comments"></textarea>
-                            </div>
-                        </div>
-                    </form>
-                </section>
-                <footer class="modal-card-foot">
-                    <button class="button is-success" id="saveIncome">Save</button>
-                    <button class="button" id="cancelModal">Cancel</button>
-                </footer>
+    <!-- Add Income Modal -->
+    <div
+      class="modal"
+      id="incomeModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="incomeModalTitle"
+    >
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title" id="incomeModalTitle">Add Income</p>
+          <button class="delete" aria-label="close" id="closeModal"></button>
+        </header>
+        <section class="modal-card-body">
+          <form id="incomeForm">
+            <!-- Income Source -->
+            <div class="field">
+              <label class="label" for="incomeSource">Income Source</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  id="incomeSource"
+                  placeholder="e.g., Salary, Freelance Work"
+                  required
+                />
+              </div>
             </div>
-        </div>
-    
-        <button class="button is-primary" id="openModal">Add Income</button>
-    
-        
-        <!-- Add Expense Modal -->
-    <div class="modal" id="expenseModal" aria-hidden="true" role="dialog" aria-labelledby="expenseModalTitle">
+
+            <!-- Amount -->
+            <div class="field">
+              <label class="label" for="incomeAmount">Amount</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="number"
+                  id="incomeAmount"
+                  placeholder="Enter amount"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div class="field">
+              <label class="label" for="incomeCategory">Category</label>
+              <div class="control">
+                <div class="select">
+                  <select id="incomeCategory" required>
+                    <option value="" disabled selected>
+                      Select a category
+                    </option>
+                    <option value="Salary">Salary</option>
+                    <option value="Bonus">Bonus</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Date -->
+            <div class="field">
+              <label class="label" for="incomeDate">Date</label>
+              <div class="control">
+                <input class="input" type="date" id="incomeDate" required />
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="field">
+              <label class="label" for="incomeNotes">Notes</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  id="incomeNotes"
+                  placeholder="Additional comments"
+                ></textarea>
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="saveIncome">Save</button>
+          <button class="button" id="cancelModal">Cancel</button>
+        </footer>
+      </div>
+    </div>
+    <!-- Add Expense Modal -->
+    <div
+      class="modal"
+      id="expenseModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="expenseModalTitle"
+    >
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title" id="expenseModalTitle">Add Expense</p>
+          <button
+            class="delete"
+            aria-label="close"
+            id="closeExpenseModal"
+          ></button>
+        </header>
+        <section class="modal-card-body">
+          <form id="expenseForm">
+            <!-- Expense Source -->
+            <div class="field">
+              <label class="label" for="expenseSource">Expense Source</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  id="expenseSource"
+                  placeholder="e.g., Rent, Groceries"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Amount -->
+            <div class="field">
+              <label class="label" for="expenseAmount">Amount</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="number"
+                  id="expenseAmount"
+                  placeholder="Enter amount"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div class="field">
+              <label class="label" for="expenseCategory">Category</label>
+              <div class="control">
+                <div class="select">
+                  <select id="expenseCategory" required>
+                    <option value="" disabled selected>
+                      Select a category
+                    </option>
+                    <option value="Rent">Rent</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Date -->
+            <div class="field">
+              <label class="label" for="expenseDate">Date</label>
+              <div class="control">
+                <input class="input" type="date" id="expenseDate" required />
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="field">
+              <label class="label" for="expenseNotes">Notes</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  id="expenseNotes"
+                  placeholder="Additional comments"
+                ></textarea>
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="saveExpense">Save</button>
+          <button class="button" id="cancelExpenseModal">Cancel</button>
+        </footer>
+      </div>
+    </div>
+    <!-- Add Investment Modal -->
+    <div class="modal" id="investmentModal" aria-hidden="true" role="dialog" aria-labelledby="investmentModalTitle">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title" id="expenseModalTitle">Add Expense</p>
-                <button class="delete" aria-label="close" id="closeExpenseModal"></button>
+                <p class="modal-card-title" id="investmentModalTitle">Add Investment</p>
+                <button class="delete" aria-label="close" id="closeInvestmentModal"></button>
             </header>
             <section class="modal-card-body">
-                <form id="expenseForm">
-                    <!-- Expense Source -->
+                <form id="investmentForm">
+                    <!-- Investment Type -->
                     <div class="field">
-                        <label class="label" for="expenseSource">Expense Source</label>
+                        <label class="label" for="investmentType">Investment Type</label>
                         <div class="control">
-                            <input class="input" type="text" id="expenseSource" placeholder="e.g., Rent, Groceries" required>
+                            <input class="input" type="text" id="investmentType" placeholder="e.g., Stocks, Bonds, Real Estate" required>
                         </div>
                     </div>
                     
                     <!-- Amount -->
                     <div class="field">
-                        <label class="label" for="expenseAmount">Amount</label>
+                        <label class="label" for="investmentAmount">Amount</label>
                         <div class="control">
-                            <input class="input" type="number" id="expenseAmount" placeholder="Enter amount" step="0.01" required>
+                            <input class="input" type="number" id="investmentAmount" placeholder="Enter amount" step="0.01" required>
                         </div>
                     </div>
                     
                     <!-- Category -->
                     <div class="field">
-                        <label class="label" for="expenseCategory">Category</label>
+                        <label class="label" for="investmentCategory">Category</label>
                         <div class="control">
                             <div class="select">
-                                <select id="expenseCategory" required>
+                                <select id="investmentCategory" required>
                                     <option value="" disabled selected>Select a category</option>
-                                    <option value="Rent">Rent</option>
-                                    <option value="Groceries">Groceries</option>
-                                    <option value="Utilities">Utilities</option>
-                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Stocks">Stocks</option>
+                                    <option value="Bonds">Bonds</option>
+                                    <option value="Real Estate">Real Estate</option>
+                                    <option value="Mutual Funds">Mutual Funds</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -170,32 +297,30 @@
                     
                     <!-- Date -->
                     <div class="field">
-                        <label class="label" for="expenseDate">Date</label>
+                        <label class="label" for="investmentDate">Date</label>
                         <div class="control">
-                            <input class="input" type="date" id="expenseDate" required>
+                            <input class="input" type="date" id="investmentDate" required>
                         </div>
                     </div>
                     
                     <!-- Notes -->
                     <div class="field">
-                        <label class="label" for="expenseNotes">Notes</label>
+                        <label class="label" for="investmentNotes">Notes</label>
                         <div class="control">
-                            <textarea class="textarea" id="expenseNotes" placeholder="Additional comments"></textarea>
+                            <textarea class="textarea" id="investmentNotes" placeholder="Additional comments"></textarea>
                         </div>
                     </div>
                 </form>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" id="saveExpense">Save</button>
-                <button class="button" id="cancelExpenseModal">Cancel</button>
+                <button class="button is-success" id="saveInvestment">Save</button>
+                <button class="button" id="cancelInvestmentModal">Cancel</button>
             </footer>
         </div>
     </div>
 
-    <button class="button is-danger" id="openExpenseModal">Add Expense</button>
-
-        <script src="../assets/expense-modal.js" defer></script>
-        <script src="../assets/income-modal.js" defer></script>
-        
-</body>
+    <script src="../assets/investment-modal.js" defer></script>
+    <script src="../assets/expense-modal.js" defer></script>
+    <script src="../assets/income-modal.js" defer></script>
+  </body>
 </html>
