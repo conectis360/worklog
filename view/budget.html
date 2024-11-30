@@ -63,6 +63,7 @@
             <button class="button is-primary" id="openModal">Add Income</button>
             <button class="button is-danger" id="openExpenseModal">Add Expense</button>
             <button class="button is-link" id="openInvestmentModal">Add Investment</button>
+            <button class="button is-success" id="openSavingsModal">Add Savings</button>
         </div>
       </div>
     </section>
@@ -319,6 +320,57 @@
         </div>
     </div>
 
+    <!-- Add Savings Modal -->
+    <div class="modal" id="savingsModal" aria-hidden="true" role="dialog" aria-labelledby="savingsModalTitle">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+          <header class="modal-card-head">
+              <p class="modal-card-title" id="savingsModalTitle">Add Savings</p>
+              <button class="delete" aria-label="close" id="closeSavingsModal"></button>
+          </header>
+          <section class="modal-card-body">
+              <form id="savingsForm">
+                  <!-- Goal Description -->
+                  <div class="field">
+                      <label class="label" for="savingsGoal">Goal Description</label>
+                      <div class="control">
+                          <input class="input" type="text" id="savingsGoal" placeholder="e.g., Emergency Fund, Vacation" required>
+                      </div>
+                  </div>
+                  
+                  <!-- Amount -->
+                  <div class="field">
+                      <label class="label" for="savingsAmount">Amount</label>
+                      <div class="control">
+                          <input class="input" type="number" id="savingsAmount" placeholder="Enter amount" step="0.01" required>
+                      </div>
+                  </div>
+                  
+                  <!-- Target Date -->
+                  <div class="field">
+                      <label class="label" for="savingsDate">Target Date</label>
+                      <div class="control">
+                          <input class="input" type="date" id="savingsDate" required>
+                      </div>
+                  </div>
+                  
+                  <!-- Notes -->
+                  <div class="field">
+                      <label class="label" for="savingsNotes">Notes</label>
+                      <div class="control">
+                          <textarea class="textarea" id="savingsNotes" placeholder="Additional comments"></textarea>
+                      </div>
+                  </div>
+              </form>
+          </section>
+          <footer class="modal-card-foot">
+              <button class="button is-success" id="saveSavings">Save</button>
+              <button class="button" id="cancelSavingsModal">Cancel</button>
+          </footer>
+      </div>
+  </div>
+
+    <script src="../assets/savings-modal.js" defer></script>
     <script src="../assets/investment-modal.js" defer></script>
     <script src="../assets/expense-modal.js" defer></script>
     <script src="../assets/income-modal.js" defer></script>

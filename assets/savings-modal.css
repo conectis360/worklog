@@ -1,0 +1,19 @@
+/* Ensure modal appears well-centered */
+.modal-card {
+    max-width: 500px;
+    width: 100%;
+}
+
+.modal-card-head {
+    background-color: #23d160; /* Bulma green */
+    color: white;
+}
+
+.modal-card-foot {
+    justify-content: space-between;
+}
+
+button#openSavingsModal {
+    margin: 2rem auto;
+    display: block;
+}
