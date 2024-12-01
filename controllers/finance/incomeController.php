@@ -12,7 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $success = $model->addExpense(1, $data['amount'], $data['category'], $data['date'], $data['notes'] ?? '');
+    $success = $model->addIncome(1, $data['amount'], $data['source'], $data['date'], $data['notes'] ?? '');
     echo json_encode(['success' => $success !== false]);
 }
+
+
 ?>

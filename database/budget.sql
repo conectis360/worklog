@@ -28,6 +28,17 @@ CREATE TABLE savings (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE investments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    amount DECIMAL(10, 2),
+    type TEXT,
+    category TEXT,
+    date DATE,
+    notes TEXT
+);
+
+
 CREATE TABLE debts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,

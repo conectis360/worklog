@@ -30,24 +30,61 @@ class BudgetModel {
         return $stmt->execute();
     }
 
+    // Add Investment
+    public function addInvestment($user_id, $amount, $type, $category, $date, $notes) {
+        $stmt = $this->db->prepare("INSERT INTO investments (user_id, amount, type, category, date, notes) 
+                                    VALUES (:user_id, :amount, :type, :category, :date, :notes)");
+        $stmt->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
+        $stmt->bindValue(':amount', $amount, SQLITE3_FLOAT);
+        $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+        $stmt->bindValue(':category', $category, SQLITE3_TEXT);
+        $stmt->bindValue(':date', $date, SQLITE3_TEXT);
+        $stmt->bindValue(':notes', $notes, SQLITE3_TEXT);
+        return $stmt->execute();
+    }
+
+    // Add Savings
+    public function addSavings($user_id, $amount, $goal, $date, $notes) {
+        $stmt = $this->db->prepare("INSERT INTO savings (user_id, amount, goal, date, notes) 
+                                    VALUES (:user_id, :amount, :goal, :date, :notes)");
+        $stmt->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
+        $stmt->bindValue(':amount', $amount, SQLITE3_FLOAT);
+        $stmt->bindValue(':goal', $goal, SQLITE3_TEXT);
+        $stmt->bindValue(':date', $date, SQLITE3_TEXT);
+        $stmt->bindValue(':notes', $notes, SQLITE3_TEXT);
+        return $stmt->execute();
+    }
+
     // Fetch Summary Data
     public function getSummary($user_id) {
         $income = $this->db->querySingle("SELECT SUM(amount) as total_income FROM income WHERE user_id = $user_id");
         $expenses = $this->db->querySingle("SELECT SUM(amount) as total_expenses FROM expenses WHERE user_id = $user_id");
         $savings = $this->db->querySingle("SELECT SUM(amount) as total_savings FROM savings WHERE user_id = $user_id");
         $debts = $this->db->querySingle("SELECT SUM(amount) as total_debts FROM debts WHERE user_id = $user_id");
+        $investments = $this->db->querySingle("SELECT SUM(amount) as total_investments FROM investments WHERE user_id = $user_id");
 
         return [
             'income' => $income ?: 0,
             'expenses' => $expenses ?: 0,
             'savings' => $savings ?: 0,
-            'debts' => $debts ?: 0
+            'debts' => $debts ?: 0,
+            'investments' => $investments ?: 0
         ];
     }
 
     // Fetch Expenses by Category
     public function getExpensesByCategory($user_id) {
         $result = $this->db->query("SELECT category, SUM(amount) as total FROM expenses WHERE user_id = $user_id GROUP BY category");
+        $categories = [];
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $categories[] = $row;
+        }
+        return $categories;
+    }
+
+    // Fetch Investments by Category
+    public function getInvestmentsByCategory($user_id) {
+        $result = $this->db->query("SELECT category, SUM(amount) as total FROM investments WHERE user_id = $user_id GROUP BY category");
         $categories = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $categories[] = $row;
